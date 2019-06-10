@@ -18,6 +18,11 @@
               <span class="block text-gray-600 text-sm mb-1">Tổng số phiếu</span>
               <input type="number" id="total" class="form-input font-bold" v-model="totalVotes">
             </label>
+            <label for="total" class="block mb-4">
+              <span class="block text-gray-600 text-sm mb-1">Số thành viên BDH</span>
+              <input type="number" id="total" class="form-input font-bold" v-model="totalMembers">
+              <small class="block text-gray-600 mt-2">Tổng số thành viên ban điều hành. Hệ thống sẽ tự động lấy đúng số ứng viên quá bán tương ứng với số lượng thành viên ban điều hành.</small>
+            </label>
           </div>
           <a href="#" class="btn btn--danger mb-16">Xóa dữ liệu</a>
         </div>
@@ -66,6 +71,7 @@ export default {
     return {
       candidateName: '',
       totalVotes: this.$store.state.totalVotes,
+      totalMembers: this.$store.state.totalMembers,
     };
   },
   methods: {
@@ -82,6 +88,11 @@ export default {
     totalVotes(newVal) {
       if (newVal !== '') {
         this.$store.dispatch('SET_TOTAL_VOTES', newVal);
+      }
+    },
+    totalMembers(newVal) {
+      if (newVal !== '') {
+        this.$store.dispatch('SET_TOTAL_MEMBERS', newVal);
       }
     },
   },

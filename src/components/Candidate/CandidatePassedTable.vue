@@ -13,22 +13,31 @@
 
     <transition-group name="list" tag="ul">
       <li
-        v-for="candidate in candidates"
+        v-for="(candidate, index) in candidates"
         :key="candidate.id"
-        class="group flex justify-between items-center rounded font-bold bg-white mb-2 px-1 pr-5 py-1 shadow-md"
+        :class="[
+          index < totalMembers && sort === 'desc' ? 'bg-green-base' : '',
+          index === 0 ? 'rounded-tl-lg rounded-tr-lg' : '',
+          index === totalMembers - 1 ? 'rounded-bl-lg rounded-br-lg' : '',
+          'px-2 py-2'
+        ]"
       >
-        <span
-          class="flex flex-col flex-shrink-0 justify-center items-center bg-blue-base text-white rounded-sm"
-          style="width: 60px; height: 60px;"
+        <div
+          class="group flex justify-between items-center rounded font-bold bg-white px-1 pr-5 py-1 shadow-md"
         >
-          <span class="text-3xl leading-none" v-text="candidate.vote"></span>
-        </span>
-        <div class="flex-1 mx-3 px-5">
-          <p v-text="candidate.name" class="text-xl"></p>
-          <p class="text-sm">
-            <span class="font-normal text-gray-600">Tỷ lệ&nbsp;</span>
-            <span v-text="Math.round(candidate.vote * 100 / totalVotes) + '%'"></span>
-          </p>
+          <span
+            class="flex flex-col flex-shrink-0 justify-center items-center bg-blue-base text-white rounded-sm"
+            style="width: 60px; height: 60px;"
+          >
+            <span class="text-3xl leading-none" v-text="candidate.vote"></span>
+          </span>
+          <div class="flex-1 mx-3 px-5">
+            <p v-text="candidate.name" class="text-xl"></p>
+            <p class="text-sm">
+              <span class="font-normal text-gray-600">Tỷ lệ&nbsp;</span>
+              <span v-text="Math.round(candidate.vote * 100 / totalVotes) + '%'"></span>
+            </p>
+          </div>
         </div>
       </li>
     </transition-group>
@@ -46,7 +55,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['totalVotes']),
+    ...mapState(['totalVotes', 'totalMembers']),
     ...mapGetters(['passedCandidates']),
     candidates() {
       const candidates = this.passedCandidates;
@@ -70,10 +79,10 @@ export default {
   },
   methods: {
     sortTable() {
-      if (this.sort === '' || this.sort === 'desc') {
-        this.sort = 'asc';
-      } else if (this.sort === 'asc') {
+      if (this.sort === '' || this.sort === 'asc') {
         this.sort = 'desc';
+      } else if (this.sort === 'desc') {
+        this.sort = 'asc';
       }
     },
   },
@@ -81,20 +90,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .list-enter-active,
-  .list-leave-active {
-    transition: all 0.6s ease-in-out;
-  }
-  .list-enter,
-  .list-leave-to {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  .list-move {
-    transition: transform 0.6s ease-in-out;
-  }
-  .list-leave-active {
-    position: absolute;
-    width: 100%;
-  }
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.6s ease-in-out;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.list-move {
+  transition: transform 0.6s ease-in-out;
+}
+.list-leave-active {
+  position: absolute;
+  width: 100%;
+}
 </style>
