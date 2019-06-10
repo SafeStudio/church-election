@@ -16,29 +16,27 @@
         v-for="(candidate, index) in candidates"
         :key="candidate.id"
         :class="[
-          index < totalMembers && sort === 'desc' ? 'bg-green-base' : '',
-          index === 0 ? 'rounded-tl-lg rounded-tr-lg' : '',
-          index === totalMembers - 1 ? 'rounded-bl-lg rounded-br-lg' : '',
-          'px-2 py-2'
+          index < totalMembers && sort === 'desc' ? 'border-2 border-green-base' : 'border-2 border-white',
+          'flex justify-between items-center rounded font-bold bg-white px-1 pr-5 py-1 mb-2 shadow-md'
         ]"
       >
-        <div
-          class="group flex justify-between items-center rounded font-bold bg-white px-1 pr-5 py-1 shadow-md"
+        <span
+          :class="[
+            index < totalMembers && sort === 'desc' ? 'bg-green-base' : 'bg-blue-base',
+            'flex flex-col flex-shrink-0 justify-center items-center text-white rounded-sm'
+          ]"
+          style="width: 50px; height: 50px;"
         >
-          <span
-            class="flex flex-col flex-shrink-0 justify-center items-center bg-blue-base text-white rounded-sm"
-            style="width: 60px; height: 60px;"
-          >
-            <span class="text-3xl leading-none" v-text="candidate.vote"></span>
-          </span>
-          <div class="flex-1 mx-3 px-5">
-            <p v-text="candidate.name" class="text-xl"></p>
-            <p class="text-sm">
-              <span class="font-normal text-gray-600">Tỷ lệ&nbsp;</span>
-              <span v-text="Math.round(candidate.vote * 100 / totalVotes) + '%'"></span>
-            </p>
-          </div>
+          <span class="text-3xl leading-none" v-text="candidate.vote"></span>
+        </span>
+        <div class="flex-1 mx-3 px-5">
+          <p v-text="candidate.name" class="text-xl"></p>
+          <p class="text-sm">
+            <span class="font-normal text-gray-600">Tỷ lệ&nbsp;</span>
+            <span v-text="Math.round(candidate.vote * 100 / totalVotes) + '%'"></span>
+          </p>
         </div>
+        <span class="text-gray-400" v-text="'#' + (index + 1)"></span>
       </li>
     </transition-group>
   </div>
