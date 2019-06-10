@@ -7,7 +7,10 @@
     >
       <div class="px-6 py-6 h-full">
         <h1 class="text-xl font-bold mb-6">
-          <a href="#">Bầu Cử</a>
+          <a href="/" class="flex items-center">
+            <img src="./assets/img/logo.png" alt="Church Election" class="mr-2 h-auto" style="width: 35px;">
+            Bầu Cử
+            </a>
         </h1>
         <div class="flex flex-col justify-between h-full">
           <div>
