@@ -1,13 +1,11 @@
-const { colors } = require('tailwindcss/defaultTheme');
-
 module.exports = {
   theme: {
     extend: {
       colors: {
         green: {
-          light: '#15CD72',
-          base: '#15CD72',
-          dark: '#15CD72',
+          light: '#46ec99',
+          base: '#15cd72',
+          dark: '#27b970',
         },
         blue: {
           light: '#4d97ff',
