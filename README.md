@@ -1,5 +1,7 @@
 # church-election
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/25f2c10f-d2c9-490b-b36b-ec71931578f4/deploy-status)](https://app.netlify.com/sites/election-app/deploys)
+
 ## Project setup
 ```
 yarn install
