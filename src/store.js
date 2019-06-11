@@ -8,6 +8,7 @@ const UPDATE_CANDIDATE_NAME = 'UPDATE_CANDIDATE_NAME';
 const DELETE_CANDIDATE_NAME = 'DELETE_CANDIDATE_NAME';
 const SET_TOTAL_VOTES = 'SET_TOTAL_VOTES';
 const SET_TOTAL_MEMBERS = 'SET_TOTAL_MEMBERS';
+const CLEAR_DATA = 'CLEAR_DATA';
 
 export default new Vuex.Store({
   state: {
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     [SET_TOTAL_MEMBERS]({ commit }, totalMembers) {
       commit(SET_TOTAL_MEMBERS, totalMembers);
     },
+    [CLEAR_DATA]({ commit }) {
+      commit(CLEAR_DATA);
+    },
   },
   mutations: {
     [ADD_CANDIDATE](state, candidate) {
@@ -62,6 +66,14 @@ export default new Vuex.Store({
     },
     [SET_TOTAL_MEMBERS](state, totalMembers) {
       state.totalMembers = totalMembers;
+      localStorage.setItem('church_election_total_members', state.totalMembers);
+    },
+    [CLEAR_DATA](state) {
+      state.candidates = [];
+      state.totalVotes = 10;
+      state.totalMembers = 5;
+      localStorage.setItem('church_election_candidates', JSON.stringify(state.candidates));
+      localStorage.setItem('church_election_total_votes', state.totalVotes);
       localStorage.setItem('church_election_total_members', state.totalMembers);
     },
   },

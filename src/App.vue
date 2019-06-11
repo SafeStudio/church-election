@@ -24,7 +24,7 @@
               <small class="block text-gray-600 mt-2">Tổng số thành viên ban điều hành. Hệ thống sẽ tự động lấy đúng số ứng viên quá bán tương ứng với số lượng thành viên ban điều hành.</small>
             </label>
           </div>
-          <a href="#" class="btn btn--danger mb-16">Xóa dữ liệu</a>
+          <clear-data></clear-data>
         </div>
       </div>
     </div>
@@ -50,7 +50,6 @@
     >
       <div class="px-6 py-6 h-full">
         <h1 class="text-xl font-bold mb-6">Danh sách quá bán</h1>
-
         <candidate-passed-table></candidate-passed-table>
       </div>
     </div>
@@ -60,19 +59,37 @@
 <script>
 import CandidateList from '@/components/Candidate/CandidateList.vue';
 import CandidatePassedTable from '@/components/Candidate/CandidatePassedTable.vue';
+import ClearData from '@/components/ClearData.vue';
 
 export default {
   name: 'app',
   components: {
     CandidateList,
     CandidatePassedTable,
+    ClearData,
   },
   data() {
     return {
       candidateName: '',
-      totalVotes: this.$store.state.totalVotes,
-      totalMembers: this.$store.state.totalMembers,
     };
+  },
+  computed: {
+    totalVotes: {
+      get() {
+        return this.$store.state.totalVotes;
+      },
+      set(newVal) {
+        this.$store.dispatch('SET_TOTAL_VOTES', newVal);
+      },
+    },
+    totalMembers: {
+      get() {
+        return this.$store.state.totalMembers;
+      },
+      set(newVal) {
+        this.$store.dispatch('SET_TOTAL_MEMBERS', newVal);
+      },
+    },
   },
   methods: {
     addCandidate() {
@@ -81,18 +98,6 @@ export default {
       } else {
         this.$store.dispatch('ADD_CANDIDATE', this.candidateName);
         this.candidateName = '';
-      }
-    },
-  },
-  watch: {
-    totalVotes(newVal) {
-      if (newVal !== '') {
-        this.$store.dispatch('SET_TOTAL_VOTES', newVal);
-      }
-    },
-    totalMembers(newVal) {
-      if (newVal !== '') {
-        this.$store.dispatch('SET_TOTAL_MEMBERS', newVal);
       }
     },
   },
