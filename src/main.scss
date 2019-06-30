@@ -6,6 +6,7 @@
 
   &:focus {
     @apply outline-none;
+    box-shadow: 0 0 0 3px #0367fb57;
   }
 
   &:hover {
@@ -22,6 +23,10 @@
     &:hover {
       @apply bg-red-600 border-red-600;
     }
+
+    &:focus {
+      box-shadow: 0 0 0 3px #ee636466;
+    }
   }
 
   &--secondary {
@@ -29,6 +34,10 @@
 
     &:hover {
       @apply bg-gray-400 border-gray-400;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px #b4b4b466;
     }
   }
 }

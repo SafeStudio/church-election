@@ -3,7 +3,7 @@
     <div
       id="sidebar"
       class="fixed inset-0 h-full bg-white z-90 border-r border-gray-400"
-      style="width: 300px;"
+      style="width: 250px;"
     >
       <div class="px-6 py-6 h-full">
         <h1 class="text-xl font-bold mb-6">
@@ -21,7 +21,6 @@
             <label for="total" class="block mb-4">
               <span class="block text-gray-600 text-sm mb-1">Số thành viên BDH</span>
               <input type="number" id="total" class="form-input font-bold" v-model="totalMembers">
-              <small class="block text-gray-600 mt-2">Tổng số thành viên ban điều hành. Hệ thống sẽ tự động lấy đúng số ứng viên quá bán tương ứng với số lượng thành viên ban điều hành.</small>
             </label>
           </div>
           <clear-data></clear-data>
@@ -29,7 +28,7 @@
       </div>
     </div>
     <!-- #sidebar -->
-    <main style="margin-left: 300px; margin-right: 550px;" class="w-full">
+    <main style="margin-left: 250px; margin-right: 550px;" class="w-full">
       <div class="h-full w-full">
         <div class="px-10 py-6 bg-gray-200">
           <form class="flex items-start" @submit.prevent="addCandidate">

@@ -4,7 +4,7 @@
   >
     <span
       class="counter flex flex-col flex-shrink-0 justify-center items-center font-bold bg-blue-base text-white rounded-sm"
-      style="width: 100px; height: 100px;"
+      style="width: 80px; height: 80px;"
     >
       <span class="text-5xl leading-none" v-text="candidate.vote"></span>
       <span v-text="votePercent"></span>
