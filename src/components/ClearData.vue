@@ -2,46 +2,56 @@
   <div class="mb-16 relative">
     <transition name="zoom-in">
       <div v-if="isShowConfirm" class="shadow-md px-4 py-4 rounded">
-        <p
-          class="text-sm mb-4"
-        >Dữ liệu sẽ bị xóa và không thể khôi phục. Bạn có chắc xóa toàn bộ dữ liệu?</p>
+        <p class="text-sm mb-4">
+          Dữ liệu sẽ bị xóa và không thể khôi phục. Bạn có chắc xóa toàn bộ dữ
+          liệu?
+        </p>
         <div class="flex">
-          <button class="btn btn--secondary flex-1 mr-1" @click="isShowConfirm = false">Hủy</button>
-          <button class="btn btn--danger flex-1 ml-1" @click="clearData">Xóa</button>
+          <button
+            class="btn btn--secondary flex-1 mr-1"
+            @click="isShowConfirm = false"
+          >
+            Hủy
+          </button>
+          <button class="btn btn--danger flex-1 ml-1" @click="clearData">
+            Xóa
+          </button>
         </div>
       </div>
     </transition>
     <transition name="fade">
       <button
-        class="btn btn--danger w-full absolute bottom-0"
         v-if="!isShowConfirm"
+        class="btn btn--danger w-full absolute bottom-0"
         @click="isShowConfirm = true"
-      >Xóa dữ liệu</button>
+      >
+        Xóa dữ liệu
+      </button>
     </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'clear-data',
+  name: "ClearData",
   data() {
     return {
-      isShowConfirm: false,
+      isShowConfirm: false
     };
   },
   methods: {
     clearData() {
-      this.$store.dispatch('CLEAR_DATA');
+      this.$store.dispatch("CLEAR_DATA");
       this.isShowConfirm = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .zoom-in-enter-active,
 .zoom-in-leave-active {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .zoom-in-enter,
@@ -52,7 +62,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .fade-enter,

@@ -8,22 +8,41 @@
       <div class="px-6 py-6 h-full">
         <h1 class="text-xl font-bold mb-6">
           <a href="/" class="flex items-center">
-            <img src="./assets/img/logo.png" alt="Church Election" class="mr-2 h-auto" style="width: 35px;">
-            Bầu Cử
-            </a>
+            <img
+              src="./assets/img/logo.png"
+              alt="Church Election"
+              class="mr-2 h-auto"
+              style="width: 35px;"
+            />
+            Bầu cử
+          </a>
         </h1>
         <div class="flex flex-col justify-between h-full">
           <div>
             <label for="total" class="block mb-4">
-              <span class="block text-gray-600 text-sm mb-1">Tổng số phiếu</span>
-              <input type="number" id="total" class="form-input font-bold" v-model="totalVotes">
+              <span class="block text-gray-600 text-sm mb-1"
+                >Tổng số phiếu</span
+              >
+              <input
+                id="total"
+                v-model="totalVotes"
+                type="number"
+                class="form-input font-bold"
+              />
             </label>
             <label for="total" class="block mb-4">
-              <span class="block text-gray-600 text-sm mb-1">Số thành viên BDH</span>
-              <input type="number" id="total" class="form-input font-bold" v-model="totalMembers">
+              <span class="block text-gray-600 text-sm mb-1"
+                >Số thành viên BĐH</span
+              >
+              <input
+                id="total"
+                v-model="totalMembers"
+                type="number"
+                class="form-input font-bold"
+              />
             </label>
           </div>
-          <clear-data></clear-data>
+          <ClearData />
         </div>
       </div>
     </div>
@@ -32,13 +51,18 @@
       <div class="h-full w-full">
         <div class="px-10 py-6 bg-gray-200">
           <form class="flex items-start" @submit.prevent="addCandidate">
-            <input type="text" placeholder="Họ và tên" class="form-input" v-model="candidateName">
+            <input
+              v-model="candidateName"
+              type="text"
+              placeholder="Họ và tên"
+              class="form-input"
+            />
             <button type="submit" class="btn">Thêm</button>
           </form>
         </div>
 
         <div class="px-10 py-6 bg-gray-200">
-          <candidate-list></candidate-list>
+          <CandidateList />
         </div>
       </div>
     </main>
@@ -49,57 +73,44 @@
     >
       <div class="px-6 py-6 h-full">
         <h1 class="text-xl font-bold mb-6">Danh sách quá bán</h1>
-        <candidate-passed-table></candidate-passed-table>
+        <CandidatePassedTable />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CandidateList from '@/components/Candidate/CandidateList.vue';
-import CandidatePassedTable from '@/components/Candidate/CandidatePassedTable.vue';
-import ClearData from '@/components/ClearData.vue';
+import { mapFields, mapMultiRowFields } from "vuex-map-fields";
+import CandidateList from "@/components/Candidate/CandidateList.vue";
+import CandidatePassedTable from "@/components/Candidate/CandidatePassedTable.vue";
+import ClearData from "@/components/ClearData.vue";
 
 export default {
-  name: 'app',
+  name: "App",
   components: {
     CandidateList,
     CandidatePassedTable,
-    ClearData,
+    ClearData
   },
   data() {
     return {
-      candidateName: '',
+      candidateName: ""
     };
   },
   computed: {
-    totalVotes: {
-      get() {
-        return this.$store.state.totalVotes;
-      },
-      set(newVal) {
-        this.$store.dispatch('SET_TOTAL_VOTES', newVal);
-      },
-    },
-    totalMembers: {
-      get() {
-        return this.$store.state.totalMembers;
-      },
-      set(newVal) {
-        this.$store.dispatch('SET_TOTAL_MEMBERS', newVal);
-      },
-    },
+    ...mapFields(["totalVotes", "totalMembers"]),
+    ...mapMultiRowFields(["candidates"])
   },
   methods: {
     addCandidate() {
-      if (this.candidateName === '') {
-        // show notice
-      } else {
-        this.$store.dispatch('ADD_CANDIDATE', this.candidateName);
-        this.candidateName = '';
+      if (this.candidateName === "") {
+        return;
       }
-    },
-  },
+
+      this.$store.dispatch("ADD_CANDIDATE", this.candidateName);
+      this.candidateName = "";
+    }
+  }
 };
 </script>
 

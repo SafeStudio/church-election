@@ -1,41 +1,43 @@
 <template>
   <transition-group name="list" tag="ul" class="relative">
-    <candidate-item
+    <CandidateItem
       v-for="(candidate, index) in candidates"
       :key="candidate.id"
       :candidate="candidate"
       :index="index + 1"
-    ></candidate-item>
+    ></CandidateItem>
   </transition-group>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import CandidateItem from './CandidateItem.vue';
+import { mapMultiRowFields } from "vuex-map-fields";
+import CandidateItem from "./CandidateItem";
 
 export default {
-  name: 'candidate-list',
+  name: "CandidateList",
   components: {
-    CandidateItem,
+    CandidateItem
   },
   computed: {
-    ...mapGetters(['candidates']),
-  },
+    ...mapMultiRowFields(["candidates"])
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.list-enter-active, .list-leave-active {
-  transition: all .6s ease-in-out;
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.6s ease-in-out;
 }
-.list-enter, .list-leave-to {
+.list-enter,
+.list-leave-to {
   opacity: 0;
   transform: translateX(-30px);
 }
 .list-move {
-  transition: transform .6s ease-in-out;
+  transition: transform 0.6s ease-in-out;
 }
-.list-leave-active  {
+.list-leave-active {
   position: absolute;
   width: 100%;
 }
